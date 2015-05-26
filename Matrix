@@ -1,0 +1,33 @@
+
+/**
+ * Write a description of class Matrix here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class Matrix
+{
+    private int row;
+    private int col;
+    private double[][] mat;
+    public Matrix(int x, int y){
+        this.row=x;
+        this.col=y;
+        this.mat = new double[x][y];
+    }
+    public void set(int r, int c, double z){
+        this.mat[r][c] = z;
+    }
+    public double get(int r, int c){
+        return this.mat[r][c];
+    }
+    //precondition : a has same dimension
+    public void add(Matrix a){
+        for(int m=0;m<a.row;m++)
+            for(int n=0;n<a.col;n++)
+                this.set(m,n,this.get(m,n)+a.get(m,n));
+    }
+    public double[][] rref(){
+        return null;
+    }
+}
