@@ -1,0 +1,30 @@
+
+/**
+ * Write a description of class SymmetricMatrix here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class SquareMatrix extends Matrix//nxn matrix
+{
+    private double[][] mat;
+    /**
+     * Constructor for objects of class SymmetricMatrix
+     */
+    public SquareMatrix(int r)
+    {
+        super(r,r);
+        this.mat = new double[r][r];
+    }
+    /**
+     * An example of a method - replace this comment with your own
+     * 
+     * @param  y   a sample parameter for a method
+     * @return     the sum of x and y 
+     */
+    public int sampleMethod(int y)
+    {
+        // put your code here
+        return x + y;
+    }
+}
