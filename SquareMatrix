@@ -1,4 +1,4 @@
-
+import java.lang.Math;
 /**
  * Write a description of class SymmetricMatrix here.
  * 
@@ -8,23 +8,36 @@
 public class SquareMatrix extends Matrix//nxn matrix
 {
     private double[][] mat;
-    /**
-     * Constructor for objects of class SymmetricMatrix
-     */
+    //row == col
+    private int row;
+    private int col;
     public SquareMatrix(int r)
     {
         super(r,r);
+        row=r;
+        col=r;
         this.mat = new double[r][r];
     }
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+    private SquareMatrix subMatrix(int y){
+        SquareMatrix a = new SquareMatrix (row-1);
+        int ctr=0;
+        for(int n=1;n<row;n++)
+        while(ctr<col-1){
+            a.set(n,ctr,this.mat[n][ctr]);
+            ctr++;
+            if(ctr==y)
+                ctr++;
+        }
+        return a;
+    }
+    public double determinant(){//recursive call of determinant of a matrix using linear algebra!!
+        if(row==1)
+            return this.mat[0][0];
+        else{
+            double a=0;
+            for(int ctr=0;ctr<row;ctr++)
+                a+=Math.pow(-1,ctr)*this.get(0,ctr)*this.subMatrix(ctr).determinant();
+            return a;
+        }
     }
 }
