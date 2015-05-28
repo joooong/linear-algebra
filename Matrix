@@ -7,6 +7,7 @@
  */
 public class Matrix
 {
+
     private int row;
     private int col;
     private double[][] mat;
@@ -22,12 +23,40 @@ public class Matrix
         return this.mat[r][c];
     }
     //precondition : a has same dimension
-    public void add(Matrix a){
+    public Matrix add(Matrix a){
+        Matrix b = new Matrix (row,col);
         for(int m=0;m<a.row;m++)
             for(int n=0;n<a.col;n++)
-                this.set(m,n,this.get(m,n)+a.get(m,n));
+                b.set(m,n,this.get(m,n)+a.get(m,n));
+        return b;
     }
-    public double[][] rref(){
-        return null;
+    public Matrix multiply ( double k){
+        Matrix a = new Matrix(row,col);
+        for(int m=0;m<this.row;m++)
+            for(int n=0;n<this.col;n++)
+                a.set(m,n,k*this.get(m,n));
+        return a;
+    }
+    public Matrix getRow(int r){
+        Matrix a = new Matrix(1,col);
+            a.mat[0] = this.mat[r];
+            return a;
+    }
+    public double[][] getMat(){
+        return this.mat;
+    }
+    public Matrix ref(){ // rows of 0 may appear in the middle
+        Matrix a = this;
+        for(int z=1;z<row;z++){
+            for(int x=z-1;x<this.row;x++){//makes leading things into 1
+                if(a.get(x,z)!=0)
+                a.mat[x] = a.getRow(x).multiply(1/(a.get(x,z))).mat[0];
+            }
+            for(int y=z;y<this.row;y++){//makes leading things into 0 by subtracting other rows
+                if(a.get(y,z)!=0)
+                a.mat[y]=a.getRow(y).add(a.getRow(z-1).multiply(-1)).mat[0];
+            }
+        }
+        return a;
     }
 }
