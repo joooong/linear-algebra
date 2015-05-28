@@ -32,6 +32,13 @@ public class Matrix
                 b.set(m,n,this.get(m,n)+a.get(m,n));//setting each of the value as sum of two matrices
         return b;
     }
+    public Matrix transpose(){//returns the transpose of the matrix
+        Matrix a = new Matrix (col,row);//reverses the dimension of the matrix
+        for(int m=0;m<a.row;m++)
+            for(int n=0;n<a.col;n++)
+                a.set(n,m,this.get(m,n));
+        return a;
+    }
     public Matrix multiply ( double k){//multiplying a scalar
         Matrix a = new Matrix(row,col);
         for(int m=0;m<this.row;m++)
